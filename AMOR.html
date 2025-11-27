@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Sempre Nós — 💗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --accent:#ff4d82;
+    --accent2:#ff79a5;
+    --bg:#1a1320;
+    --card:#261c2e;
+    --text:#fff;
+    --muted:#cdb7d9;
+}
+body{
+    font-family:"Poppins", sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+    margin:0;
+    transition:.5s;
+}
+header{
+    position:relative;
+    height:55vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:0 20px;
+    overflow:hidden;
+    background:linear-gradient(135deg, #ff4d82, #ff79a5);
+}
+header .content{
+    position:relative;
+    z-index:2;
+    color:white;
+}
+header h1{
+    font-family:"Dancing Script", cursive;
+    font-size:clamp(2.5rem,4vw,5rem);
+    margin-bottom:12px;
+    text-shadow:0 4px 20px rgba(0,0,0,.5);
+    animation: pulse 2s infinite;
+}
+header p{
+    font-size:1.2rem;
+    margin-bottom:15px;
+    text-shadow:0 3px 14px rgba(0,0,0,.6);
+}
+.btn{
+    background:var(--accent);
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:50px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+    box-shadow:0 10px 25px rgba(255,77,130,.25);
+}
+.btn:hover{
+    transform:translateY(-4px) scale(1.05);
+    box-shadow:0 12px 30px rgba(255,77,130,.35);
+}
+
+/* CORAÇÕES E CONFETI */
+#hearts, #confetti{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+}
+.heart, .confetto{
+    position:absolute;
+    width:20px;
+    height:20px;
+    transform:rotate(45deg);
+    animation:floatUp linear infinite;
+    opacity:.9;
+}
+.heart:before, .heart:after{
+    content:"";
+    position:absolute;
+    width:20px;
+    height:20px;
+    background:var(--accent);
+    border-radius:50%;
+}
+.heart:before{top:-10px;left:0}
+.heart:after{left:10px;top:0}
+@keyframes floatUp{
+    0%{transform:translateY(0) rotate(45deg);opacity:0}
+    20%{opacity:1}
+    100%{transform:translateY(-120vh) rotate(45deg);opacity:0}
+}
+@keyframes pulse{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.05);}
+}
+
+/* SECTIONS */
+section{
+    padding:70px 20px;
+    max-width:1200px;
+    margin:auto;
+    opacity:0;
+    transform:translateY(30px);
+    transition:all .8s ease;
+}
+section.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+h2.title{
+    font-family:"Dancing Script", cursive;
+    font-size:2.5rem;
+    color:var(--accent);
+    text-align:center;
+    margin-bottom:30px;
+}
+
+/* TIMELINE */
+.timeline{
+    display:grid;
+    gap:25px;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+}
+.card{
+    background:var(--card);
+    padding:25px;
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,.07);
+    transition:.3s;
+    cursor:pointer;
+}
+.card:hover{
+    transform:translateY(-5px) scale(1.02);
+    box-shadow:0 15px 35px rgba(255,77,130,.25);
+}
+.card .date{font-weight:600;color:var(--accent)}
+
+/* GALERIA */
+.gallery{
+    display:grid;
+    gap:20px;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+}
+.gallery img{
+    width:100%;
+    height:280px;
+    object-fit:cover;
+    border-radius:16px;
+    cursor:pointer;
+    transition:.35s;
+}
+.gallery img:hover{
+    transform:scale(1.07);
+    box-shadow:0 8px 25px rgba(255,77,130,.25);
+}
+
+/* LIGHTBOX */
+.lightbox{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.85);
+    z-index:9999;
+}
+.lightbox img{max-width:90%;max-height:85%;border-radius:12px}
+.lightbox button{
+    position:absolute;
+    background:none;
+    border:none;
+    color:white;
+    font-size:2rem;
+    cursor:pointer;
+}
+
+/* CARTA E TEXTOS */
+.letter, .textos{
+    background:var(--card);
+    padding:30px;
+    border-radius:16px;
+    max-width:900px;
+    margin:auto 0 50px;
+    font-family:"Dancing Script", cursive;
+    font-size:1.3rem;
+    line-height:1.8;
+    box-shadow:0 12px 40px rgba(0,0,0,.06);
+    text-align:center;
+}
+.typed{min-height:250px;display:block;color:var(--muted); font-size:1.25rem;}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:35px 20px;
+    margin-top:50px;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    color:white;
+    font-family:"Dancing Script";
+    font-size:1.2rem;
+}
+
+/* FLOATING BUTTONS */
+.floating{
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+.floating button{
+    width:55px;height:55px;
+    border-radius:50%;
+    border:none;
+    cursor:pointer;
+    background:white;
+    box-shadow:0 10px 28px rgba(0,0,0,.15);
+    font-size:22px;
+}
+.floating .top{background:var(--accent);color:white;}
+.audio-control{
+    position:fixed;
+    left:18px;
+    bottom:18px;
+    background:var(--accent);
+    border:none;
+    border-radius:50%;
+    width:55px;
+    height:55px;
+    cursor:pointer;
+    color:white;
+    font-size:22px;
+    box-shadow:0 10px 28px rgba(0,0,0,.15);
+}
+</style>
+</head>
+<body>
+
+<div id="hearts"></div>
+<div id="confetti"></div>
+
+<header>
+    <div class="content">
+        <h1>Você é meu pra sempre 💗</h1>
+        <p>Mesmo com distância, cada lembrança é nossa conexão eterna.</p>
+        <p>Estamos juntos há <span id="dias">0</span> dias ❤️</p>
+        <button class="btn" onclick="scrollToSection('historia')">Nossa História</button>
+    </div>
+</header>
+
+<section id="historia">
+    <h2 class="title">Nossa Linha do Tempo 💌</h2>
+    <div class="timeline">
+        <div class="card" onclick="showMessage('09/02/2024', 'O dia que começou nossa história. Cada sorriso seu mudou tudo.')">
+            <div class="date">09/02/2024</div>
+            <h3>O Começo</h3>
+            <p>O dia em que nossos corações se encontraram.</p>
+        </div>
+        <div class="card" onclick="showMessage('Primeiro Abraço', 'Senti que tinha encontrado meu lar no seu abraço.')">
+            <div class="date">Primeiro Abraço</div>
+            <h3>O Calor do Começo</h3>
+            <p>Um momento que ficará pra sempre na memória.</p>
+        </div>
+        <div class="card" onclick="showMessage('Hoje', 'Cada dia juntos é uma aventura, e cada desafio se torna leve com você.')">
+            <div class="date">Hoje</div>
+            <h3>Amor Diário</h3>
+            <p>Cada detalhe vira memória inesquecível.</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h2 class="title">Nossos Momentos 🌸</h2>
+    <div class="gallery">
+        <img src="amor1.jpeg">
+        <img src="amor2.jpeg.jpeg">
+        <img src="amor3.jpeg.jpeg">
+        <img src="amor4.jpeg.jpeg">
+        <img src="amor5.jpeg.jpeg">
+    </div>
+</section>
+
+<div class="lightbox" id="lb">
+    <button onclick="closeLB()">✕</button>
+    <img id="lbImg">
+</div>
+
+<section>
+    <h2 class="title">Palavras e Mensagens 💖</h2>
+    <div class="textos">
+        <p>“O amor é paciente, o amor é bondoso. Não inveja, não se vangloria, não se orgulha.” — 1 Coríntios 13:4</p>
+        <p>Mesmo na distância, meu coração sente sua presença a cada batida. 💗</p>
+        <p>“Tudo posso naquele que me fortalece.” — Filipenses 4:13</p>
+        <p>Cada momento com você me lembra que o amor verdadeiro existe e vale cada instante. 🌸</p>
+        <p>Saudades que se transformam em lembranças doces, risadas e promessas silenciosas. 💕</p>
+    </div>
+</section>
+
+<section>
+    <h2 class="title">Uma Carta Para Você 💌</h2>
+    <div class="letter">
+        <span class="typed" id="typed"></span>
+        <br>— Com amor, sempre. 💗
+    </div>
+</section>
+
+<footer>Feito com todo o meu amor 💗</footer>
+
+<div class="floating">
+    <button class="top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    <button onclick="toggleDark()">🌙</button>
+</div>
+
+<button class="audio-control" onclick="toggleAudio()">🔊</button>
+<audio id="bgMusic" loop autoplay>
+    <source src="amorzinho.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// CONTADOR DE DIAS
+const start = new Date("2024-02-09");
+function update(){ document.getElementById("dias").textContent = Math.floor((Date.now()-start)/86400000); }
+update(); setInterval(update,3600000);
+
+// CORAÇÕES
+function hearts(){ const ctn=document.getElementById("hearts"); for(let i=0;i<8;i++){ let h=document.createElement("div"); h.className="heart"; h.style.left=Math.random()*100+"%"; h.style.animationDuration=(5+Math.random()*6)+"s"; ctn.appendChild(h); setTimeout(()=>h.remove(),12000);} }
+setInterval(hearts,2000);
+
+// CONFETI
+function confetti(){ const ctn=document.getElementById("confetti"); for(let i=0;i<20;i++){ let c=document.createElement("div"); c.className="confetto"; c.style.left=Math.random()*100+"%"; c.style.width=c.style.height=(5+Math.random()*10)+"px"; c.style.background=`hsl(${Math.random()*360},70%,70%)`; ctn.appendChild(c); setTimeout(()=>c.remove(),3000);} }
+document.querySelectorAll(".btn, .card").forEach(b=>b.addEventListener("click",confetti));
+
+// LIGHTBOX
+let imgs=[...document.querySelectorAll(".gallery img")]; imgs.forEach((img,i)=> img.onclick=()=>openLB(i));
+function openLB(i){ document.getElementById("lbImg").src=imgs[i].src; document.getElementById("lb").style.display="flex"; }
+function closeLB(){ document.getElementById("lb").style.display="none"; }
+
+// CARTA DIGITANDO
+let text=`Meu amor,\n\nCada dia ao seu lado é um pedaço de céu.\nVocê é a calma que me encontra, o sorriso que me salva.\nMesmo que demos um tempo, meu coração sente sua falta a cada instante.\nCada desafio se torna leve com você.\nObrigado por existir em minha vida.\n\nTe amo infinitamente. 💗`;
+let idx=0; function type(){ if(idx <= text.length){ document.getElementById("typed").innerHTML = text.slice(0,idx).replace(/\n/g,"<br>"); idx++; setTimeout(type,35); } }
+type();
+
+// DARK MODE
+function toggleDark(){ document.body.classList.toggle("dark"); }
+
+// SCROLL SUAVE
+function scrollToSection(id){ document.getElementById(id).scrollIntoView({behavior:"smooth"}); }
+
+// ANIMAÇÃO AO SCROLL
+const sections = document.querySelectorAll("section");
+window.addEventListener("scroll",()=>{ sections.forEach(s=>{ const rect = s.getBoundingClientRect(); if(rect.top < window.innerHeight - 100){ s.classList.add("visible"); } }); });
+
+// AUDIO
+const bgMusic=document.getElementById("bgMusic"); bgMusic.play().catch(()=>{});
+function toggleAudio(){ if(bgMusic.paused){ bgMusic.play(); } else { bgMusic.pause(); } }
+
+// MENSAGENS SURPRESA
+function showMessage(title,msg){ alert(`${title}\n\n${msg}`); }
+</script>
+</body>
+</html>
